@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RAG Compass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient">
+      <div class="orb orb-a"></div>
+      <div class="orb orb-b"></div>
+    </div>
+
+    <header class="hero">
+      <div class="hero__content">
+        <span class="hero__tag">Minimal RAG Studio</span>
+        <h1>RAG Compass</h1>
+        <p>
+          Upload documents, retrieve grounded context, and ask focused questions.
+          Built for clean experimentation and quick demos.
+        </p>
+      </div>
+      <div class="hero__meta">
+        <div>
+          <span class="meta__label">Backend</span>
+          <span class="meta__value">FastAPI + FAISS</span>
+        </div>
+        <div>
+          <span class="meta__label">Top-K</span>
+          <span class="meta__value">3 chunks</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card" style="--delay: 0s">
+        <header>
+          <h2>Upload documents</h2>
+          <p class="muted">PDF or text files only. Chunks are ~500 chars.</p>
+        </header>
+        <form id="upload-form" class="stack">
+          <label class="dropzone" id="dropzone">
+            <input id="file-input" type="file" accept=".pdf,.txt" />
+            <div>
+              <strong>Drop file</strong> or click to browse
+              <span id="file-name" class="muted">No file selected</span>
+            </div>
+          </label>
+          <button type="submit" class="primary">Upload</button>
+          <p id="upload-status" class="status muted">Waiting for file.</p>
+        </form>
+      </section>
+
+      <section class="card" style="--delay: 0.15s">
+        <header>
+          <h2>Ask a question</h2>
+          <p class="muted">Answers are grounded strictly in retrieved context.</p>
+        </header>
+        <form id="query-form" class="stack">
+          <label class="field">
+            <span class="field__label">Query</span>
+            <input id="query-input" type="text" placeholder="What does the document say about..." />
+          </label>
+          <button type="submit" class="primary">Search</button>
+        </form>
+      </section>
+
+      <section class="card wide" style="--delay: 0.3s">
+        <header>
+          <h2>Answer</h2>
+          <p class="muted">Gemini placeholder response for now.</p>
+        </header>
+        <div id="answer" class="answer">No answer yet.</div>
+      </section>
+
+      <section class="card wide" style="--delay: 0.45s">
+        <header>
+          <h2>Retrieved chunks</h2>
+          <p class="muted">Top matches with source and score.</p>
+        </header>
+        <div id="chunks" class="chunks"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Powered by FAISS + sentence-transformers</span>
+      <span>Built for Render deployments</span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
